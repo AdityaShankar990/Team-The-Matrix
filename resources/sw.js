@@ -39,3 +39,28 @@ self.addEventListener("fetch", (event) => {
 
 	event.respondWith(handleRequest(req));
 });
+async function handleStaleWhileRevalidate(req, event) {
+	// Cache API access can be blocked entirely or otherwise throw, treat
+	// that the same as "nothing cached yet" instead of letting it reject
+	// this whole handler and turn into a broken response for the page.
+	const cache = await caches.open(CACHE_NAME).catch(() => null);
+	const cached = cache ? await cache.match(req).catch(() => null) : null;
+
+	const revalidate = fetch(req).then((networkResponse) => {
+		if (cache && networkResponse && networkResponse.ok) {
+			cache.put(req, networkResponse.clone()).catch(() => {}); // storage blocked
+		}
+		return networkResponse;
+	}).catch(() => null); // offline
+
+	if (cached) {
+		if (event && event.waitUntil) event.waitUntil(revalidate);
+		return cached;
+	}
+
+	// Nothing cached
+	const fresh = await revalidate;
+	if (fresh) return fresh;
+	throw new Error("Network error and no cached copy available");
+}
+
