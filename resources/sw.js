@@ -63,4 +63,31 @@ async function handleStaleWhileRevalidate(req, event) {
 	if (fresh) return fresh;
 	throw new Error("Network error and no cached copy available");
 }
+async function handleRequest(req) {
+	const cache = await caches.open(CACHE_NAME).catch(() => null);
+	const cached = cache ? await cache.match(req).catch(() => null) : null;
+
+	// If we already have a cached copy, ask the server to confirm whether
+	// it's still current using its checksum-equivalent headers, instead of
+	// blindly re-downloading the whole file every time.
+	let networkRequest = req;
+	if (cached) {
+		const etag = cached.headers.get("ETag");
+		const lastModified = cached.headers.get("Last-Modified");
+		if (etag || lastModified) {
+			const headers = new Headers(req.headers);
+			if (etag) headers.set("If-None-Match", etag);
+			if (lastModified) headers.set("If-Modified-Since", lastModified);
+			networkRequest = new Request(req.url, {
+				method: "GET",
+				headers,
+				credentials: req.credentials,
+				// "navigate" isn't a legal mode to set manually on a new Request.
+				mode: req.mode === "navigate" ? "same-origin" : req.mode,
+				redirect: "follow",
+				cache: "no-store",
+			});
+		}
+	}
+
 
