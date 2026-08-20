@@ -1,0 +1,38 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capabilities for the main window",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "opener:default",
+    {
+      "identifier": "opener:allow-open-url",
+      "allow": [{ "url": "https://*" }, { "url": "http://*" }]
+    },
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        {
+          "name": "binaries/llama-server",
+          "sidecar": true,
+          "args": [
+            "-m",
+            { "validator": ".+\\.gguf$" },
+            "-c",
+            { "validator": "\\d+" },
+            "-ngl",
+            { "validator": "\\d+" },
+            "-fa",
+            "on",
+            "--mlock",
+            "--host",
+            "127.0.0.1",
+            "--port",
+            { "validator": "\\d+" }
+          ]
+        }
+      ]
+    }
+  ]
+}
