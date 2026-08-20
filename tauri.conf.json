@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "beuclub",
+  "version": "1.0.0",
+  "identifier": "com.beuclub",
+  "build": {
+    "frontendDist": "https://beuclub.site.je/"
+  },
+  "app": {
+    "withGlobalTauri": true
+  },
+  "bundle": {
+    "active": true,
+    "publisher": "CollegeSaathi Corporation",
+    "targets": ["nsis", "msi"],
+    "externalBin": ["binaries/llama-server"],
+    "fileAssociations": [
+      {
+        "ext": ["pdf"],
+        "name": "PDF Document",
+        "description": "Open with beuclub Board",
+        "role": "Editor"
+      }
+    ],
+    "resources": {
+      "resources/models/*": "models/",
+      "binaries/*.dll": "./"
+    },
+    "icon": [
+      "icons/icon16.png",
+      "icons/icon32.png",
+      "icons/icon48.png",
+      "icons/icon128.png",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": ["English"],
+        "installerIcon": "icons/icon.ico",
+        "uninstallerIcon": "icons/icon.ico",
+        "headerImage": "icons/nsis-header.bmp",
+        "sidebarImage": "icons/nsis-sidebar.bmp"
+      }
+    }
+  }
+}
