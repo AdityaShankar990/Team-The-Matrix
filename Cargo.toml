@@ -2,7 +2,7 @@
 name = "beuclub"
 version = "1.0.0"
 description = "beuclub"
-authors = ["collegesaathi"]
+authors = ["The Matrix"]
 edition = "2021"
 
 [lib]
