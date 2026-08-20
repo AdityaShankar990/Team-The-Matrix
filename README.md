@@ -79,6 +79,11 @@ npm start
 | Suhani Thakur | [@suhani-0501](https://github.com/suhani-0501) |
 | Abhijit Viswakarma | [@abhijitviswakarma](https://github.com/abhijitviswakarma) |
 | Amit | [@amit1672007all-glitch](https://github.com/amit1672007all-glitch) |
+---
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
