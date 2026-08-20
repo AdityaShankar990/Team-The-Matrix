@@ -19,3 +19,26 @@
 		<link rel="stylesheet" href="assets/css/styles.2ed543e1.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="assets/css/styles.2ed543e1.css"></noscript>
 		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 	</head>
+	<body>
+		<div id="appRoot"></div>
+		<!-- redirects to authBootCheck() -->
+		<script src="assets/js/views/view-auth.d932c849.js"></script>
+		<script>
+			window.IS_AUTH_PAGE = true;
+			document.getElementById('appRoot').innerHTML = VIEW_AUTH_HTML;
+			// dashboard check above: if session token already exists 
+			// (e.g. someone bookmarked auth.html, or hit Back after logging in), 
+			// skip straight to the dashboard before this login form ever.
+			if (localStorage.getItem('dt_auth_token_v1')) {
+				var __params = new URLSearchParams(window.location.search);
+				var __allowed = ['dashboard.html','tracker.html','club.html','board.html',
+					'holidays.html','notices.html','results.html','syllabus.html',
+					'about.html','terms.html','privacy.html','comp_exam.html'];
+				var __next = __params.get('next') || 'dashboard.html';
+				var __nextPage = __next.split('?')[0].split('#')[0];
+				if (__allowed.indexOf(__nextPage) === -1) __next = 'dashboard.html';
+				window.location.replace(__next);
+			}
+		</script>
+	</body>
+</html>
