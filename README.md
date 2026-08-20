@@ -56,6 +56,30 @@
    * Enables community interaction around relevant content and activities.
 
 
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Tejas-India-Hackathon-2026/Team-The-Matrix.git
+cd Team-The-Matrix
+
+# Install dependencies
+npm install
+
+# Run the project
+npm start
+```
+## Contributer:
+
+**Team The Matrix** — Tejas India Hackathon 2026
+
+| Member | GitHub |
+|---|---|
+| Aditya Shankar | [@AdityaShankar990](https://github.com/AdityaShankar990) |
+| Suhani Thakur | [@suhani-0501](https://github.com/suhani-0501) |
+| Abhijit Viswakarma | [@abhijitviswakarma](https://github.com/abhijitviswakarma) |
+| Amit | [@amit1672007all-glitch](https://github.com/amit1672007all-glitch) |
+
 ---
 
 
