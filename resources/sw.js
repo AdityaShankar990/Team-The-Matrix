@@ -89,5 +89,29 @@ async function handleRequest(req) {
 			});
 		}
 	}
+		try {
+		const networkResponse = await fetch(networkRequest, { cache: "no-store" });
+		// Server confirms the checksum/ETag still matches, keep using the
+		// cached file instead of loading it from the server again.
+		if (networkResponse.status === 304 && cached) {
+			return cached;
+		}
+
+		if (networkResponse && networkResponse.ok) {
+			// File is new or changed on the server, update the file + checksum
+			// in the cache, and use the fresh copy.
+			if (cache) cache.put(req, networkResponse.clone()).catch(() => {});
+			return networkResponse;
+		}
+
+		// Server returned an error status, prefer a cached copy over an error
+		// page, if we have one.
+		return cached || networkResponse;
+	} catch (err) {
+		// No network at all, keeps working offline.
+		if (cached) return cached;
+		throw err;
+	}
+}
 
 
