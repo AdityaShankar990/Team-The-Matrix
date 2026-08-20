@@ -69,6 +69,18 @@ npm install
 # Run the project
 npm start
 ```
+## Project Structure
+
+```
+Team-The-Matrix/
+├── binaries/        # llama sidecar
+├── resources/       # Messaging, tracker sync, and notice/result APIs
+├── root_dir         # tauri-winApps
+├── resources/assets/# assets
+├── resources/models/# ai model
+└── README.md
+```
+
 ## Contributer:
 
 **Team The Matrix** — Tejas India Hackathon 2026
