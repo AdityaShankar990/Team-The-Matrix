@@ -41,5 +41,22 @@
         </div>
         <div class="terminal-body" id="log"></div>
     </div>
+	<div class="ring-wrap">
+        <div class="ring">
+            <svg width="75" height="75" viewBox="0 0 90 90">
+                <circle class="circle-track" cx="45" cy="45" r="40"></circle>
+                <circle class="ring-fill" id="ringfill" cx="45" cy="45" r="40"></circle>
+            </svg>
+
+            <div class="ring-pct" id="pct">0%</div>
+        </div>
+
+        <div class="status" id="status">Connecting to server&hellip;
+        <a class="launch" id="launchBtn" href="auth.html">Open Dashboard</a>
+        <button type="button" class="refresh-btn" hidden id="refreshBtn">
+            <svg height="13" width="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"></svg>
+        </button>
+        </div>
+    </div>
 
 </body>
