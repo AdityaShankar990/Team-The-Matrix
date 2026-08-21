@@ -67,7 +67,7 @@ cd Team-The-Matrix
 npm install
 
 # Run the project
-npm start
+npm run build
 ```
 ## Project Structure
 
